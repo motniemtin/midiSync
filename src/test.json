@@ -1,0 +1,27 @@
+[
+  {
+    "id": "char_gohan_hyper3d_1",
+    "name": "GoHan",
+    "gender": "Male",
+    "style": "Hyper-realistic 3D",
+    "type": "Warrior",
+    "description": "A hyper-realistic 3D styled character named GoHan, a muscular male warrior with spiky golden hair glowing with energy. His sharp eyes radiate determination and focus. He wears a battle-worn orange gi with a deep blue undershirt, sash, and boots, showing signs of intense combat. The fabric wrinkles and tears naturally, reflecting both power and realism. His stance is confident and ready for action, one hand tightening his wrist wrap as he prepares for battle. The model captures a perfect balance between human anatomy and stylized intensity, making him appear both otherworldly and grounded.",
+    "outfit": {
+      "upper": "Orange martial gi with deep blue undershirt and sash",
+      "lower": "Loose orange pants, detailed fabric folds",
+      "accessories": "Blue wristbands and boots with brown bindings",
+      "condition": "Slightly torn and worn from battle"
+    },
+    "appearance": {
+      "hair": "Golden, spiky, glowing with aura",
+      "eyes": "Aqua green, intense gaze",
+      "body": "Muscular and defined, battle-ready posture",
+      "skin": "Light tone with subtle shading for realism"
+    },
+    "voice": {
+      "language": "English",
+      "tone": "Powerful and determined",
+      "emotion": "Focused energy with controlled aggression"
+    }
+  }
+]

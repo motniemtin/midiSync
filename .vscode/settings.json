@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "dist": true,
+        "ios": true,
+        "android": true,       
+    }
+}

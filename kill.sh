@@ -1,0 +1,1 @@
+kill -9 $(lsof -t -iTCP:3000 -sTCP:LISTEN)
