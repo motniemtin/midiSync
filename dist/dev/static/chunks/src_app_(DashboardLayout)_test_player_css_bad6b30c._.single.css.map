@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/(DashboardLayout)/test/player.css"],"sourcesContent":[".at-cursor-bar {\n  /* Defines the color of the bar background when a bar is played */\n  background: rgba(255, 242, 0, 0.25);\n}\n\n.at-selection div {\n  /* Defines the color of the selection background */\n  background: rgba(64, 64, 255, 0.2);\n}\n\n.at-cursor-beat {\n  /* Defines the beat cursor */\n  background: rgba(64, 64, 255, 0.75);\n  width: 3px;\n}\n\n.at-highlight * {\n  /* Defines the color of the music symbols when they are being played (svg) */\n  fill: #0078ff;\n  stroke: #0078ff;\n}"],"names":[],"mappings":"AAAA;;;;AAKA;;;;AAKA;;;;;AAMA"}}]
+}

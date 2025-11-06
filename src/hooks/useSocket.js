@@ -27,6 +27,7 @@ export function useSocket() {
     ioSocket.sails.url = "https://server.pianosync.com";
     ioSocket.sails.transports = ["websocket"];
     ioSocket.sails.reconnection = true;
+    ioSocket.sails.environment = 'production';
 
     const token = localStorage.getItem("token");
     if (token) ioSocket.sails.headers = { Authorization: `Bearer ${token}` };

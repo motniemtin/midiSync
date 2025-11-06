@@ -1,4 +1,4 @@
-// import '@/remotion/player.css';
+import '@/remotion/player.css';
 import { spring } from "remotion";
 import React from "react";
 import { useRef, useState, useEffect, useCallback } from "react";
@@ -27,19 +27,6 @@ import Particles from "@/remotion/Proton/Particles";
 import { TitleScene } from '@/remotion/TitleScene/TitleScene';
 import { LogoScene } from '@/remotion/TitleScene/LogoScene';
 import { Visualization } from '@/remotion/Visualization/Visualization';
-// const waitForFont = delayRender(); 
-// const font = new FontFace(
-//   `Bravura`,
-//   `url('${staticFile("Bravura.woff")}') format('woff')`
-// );
-
-// font
-//   .load()
-//   .then(() => {
-//     document.fonts.add(font);
-//     continueRender(waitForFont);
-//   })
-//   .catch((err) => console.log("Error loading font", err));
 
 export const AlphaTab = React.memo(({ title, author, xmlPath }) => {
   const frame = useCurrentFrame();
@@ -106,7 +93,13 @@ export const AlphaTab = React.memo(({ title, author, xmlPath }) => {
         enablePlayer: true,
         enableCursor: true,
         enableUserInteraction: true,
+        srollElement: document.querySelector(".at-viewport"),
+        scrollMode: "continue",
+        enableAnimatedBeatCursor: false,
         soundFont: '/alphatab/soundfont/sonivox.sf2'
+      },
+      display: {
+        layoutMode: "horizontal",
       }
     } as Settings);
     apiRef.current = api;
@@ -174,19 +167,13 @@ export const AlphaTab = React.memo(({ title, author, xmlPath }) => {
   return (
     <AbsoluteFill>
       <AbsoluteFill>
-        {false && notesJson && <PianoComposition style={pianoLocation} data={notesJson} introTime={introTime} />}
-      </AbsoluteFill>
-      <AbsoluteFill>
-        {notesJson && <GuitarComposition introTime={introTime} guitarLocation={{ top: 0, left: 0, width: 1860, height: 900 }} />}
-      </AbsoluteFill>
-      <AbsoluteFill>
-        {audioData && <Visualization audioData={audioData} />}
+        {notesJson && <PianoComposition style={pianoLocation} data={notesJson} introTime={introTime} />}
       </AbsoluteFill>
       <AbsoluteFill style={location}>
         <div className="at-wrap">
           <div className="at-content" style={{ height: alphaTabHeight }}>
             <div className="at-viewport" style={{ left: -1 * scroll }}>
-              <div className="at-main" ref={ref} style={{ backgroundColor: '#ffffffb0', borderRadius: 10, overflow: 'hidden' }} />
+              <div className="at-main" ref={elementRef} style={{ backgroundColor: '#ffffffb0', borderRadius: 10, overflow: 'hidden' }} />
             </div>
           </div>
         </div>
@@ -197,7 +184,6 @@ export const AlphaTab = React.memo(({ title, author, xmlPath }) => {
       <AbsoluteFill style={{ opacity }}>
         <LogoScene />
       </AbsoluteFill>
-      {/* <Audio src={music} /> */}
     </AbsoluteFill>
   );
 });

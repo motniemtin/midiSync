@@ -12,7 +12,6 @@ import NextTopLoader from 'nextjs-toploader';
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import "@/app/api/index";
 import "@/utils/i18n";
 import { NextAppDirEmotionCacheProvider } from "@/utils/theme/EmotionCache";
 import Head from "next/head";

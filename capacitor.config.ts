@@ -15,6 +15,14 @@ const config: CapacitorConfig = {
       ],
       "serverClientId": "271408278055-r7cvu2ccfaagpts13aeqq8lbs40us7th.apps.googleusercontent.com",
       "forceCodeForRefreshToken": true
+    },
+    "BluetoothLe": {
+      "displayStrings": {
+        "scanning": "Scanning...",
+        "cancel": "Cancel",
+        "availableDevices": "Available devices",
+        "noDeviceFound": "No device found"
+      }
     }
   }
 };

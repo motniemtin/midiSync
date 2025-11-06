@@ -1,0 +1,20 @@
+/* [project]/src/app/(DashboardLayout)/test/player.css [app-client] (css) */
+.at-cursor-bar {
+  background: #fff20040;
+}
+
+.at-selection div {
+  background: #4040ff33;
+}
+
+.at-cursor-beat {
+  background: #4040ffbf;
+  width: 3px;
+}
+
+.at-highlight * {
+  fill: #0078ff;
+  stroke: #0078ff;
+}
+
+/*# sourceMappingURL=src_app_%28DashboardLayout%29_test_player_a7c8fdf8.css.map*/

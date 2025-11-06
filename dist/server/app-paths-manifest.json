@@ -1,7 +1,0 @@
-{
-  "/(DashboardLayout)/page": "app/(DashboardLayout)/page.js",
-  "/(DashboardLayout)/songs/page": "app/(DashboardLayout)/songs/page.js",
-  "/(DashboardLayout)/user/login/page": "app/(DashboardLayout)/user/login/page.js",
-  "/(DashboardLayout)/upload/page": "app/(DashboardLayout)/upload/page.js",
-  "/(DashboardLayout)/song/page": "app/(DashboardLayout)/song/page.js"
-}

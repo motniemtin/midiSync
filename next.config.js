@@ -1,4 +1,3 @@
-const { AlphaTabWebPackPlugin } = require('@coderline/alphatab/webpack');
 const nextConfig = {
   modularizeImports: {
     "@mui/icons-material": {
@@ -9,21 +8,15 @@ const nextConfig = {
     // ❗ Cho phép build dù có lỗi TypeScript
     ignoreBuildErrors: true,
   },
-  swcMinify: true,
+  reactStrictMode: true,
+  allowedDevOrigins: [`https://pianosync.com:3000`, `https://localhost:3000`],
+  
   compiler: {
-    styledComponents: true,
+    styledComponents: true
   },
-  webpack(config) {
-    config.watchOptions = {
-      ignored: ['**/node_modules/**', '**/.next/**', '**/dist/**'],
-    };
-    config.plugins.push(
-      new AlphaTabWebPackPlugin({
-        assetOutputDir: 'public/alphatab'
-      })
-    );
-    return config;
-  },
+  turbopack: {
+
+  }, 
   images: { unoptimized: true }, // nếu bạn dùng <Image>
   output: 'export',
   distDir: 'dist',

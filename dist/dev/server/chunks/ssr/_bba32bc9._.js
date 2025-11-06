@@ -1,0 +1,1741 @@
+module.exports = [
+"[project]/src/app/(DashboardLayout)/piano/page.tsx [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor/core/dist/index.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/index.js [app-ssr] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/bleClient.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/shared/lib/app-dynamic.js [app-ssr] (ecmascript)");
+;
+"use client";
+;
+;
+;
+;
+;
+// Dynamically import PianoTutorial to ensure it's only rendered on the client side
+const PianoTutorial = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$shared$2f$lib$2f$app$2d$dynamic$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"])(async ()=>{}, {
+    loadableGenerated: {
+        modules: [
+            "[project]/src/app/(DashboardLayout)/piano/PianoTutorial.tsx [app-client] (ecmascript, next/dynamic entry)"
+        ]
+    },
+    ssr: false
+});
+const MIDI_SERVICE_UUID = "03b80e5a-ede8-4b33-a751-6ce34ec4c700";
+const MIDI_CHARACTERISTIC_UUID = "7772e5db-3868-4112-a1a9-f2669d106bf3";
+const MidiPianoScanner = ()=>{
+    const [scanResults, setScanResults] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [connectedDevice, setConnectedDevice] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [log, setLog] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const midiMessageCallbackRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])();
+    const logMsg = (msg)=>setLog((prev)=>prev + msg + "\n");
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (("TURBOPACK compile-time value", "undefined") !== "undefined" && __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].isNativePlatform()) //TURBOPACK unreachable
+        ;
+        else {
+            logMsg("🌐 Running in browser mode (Web Bluetooth API)");
+        }
+    }, []);
+    const handleMidiMessage = (data)=>{
+        if (midiMessageCallbackRef.current) {
+            midiMessageCallbackRef.current(data);
+        }
+    };
+    const registerMidiMessageHandler = (callback)=>{
+        midiMessageCallbackRef.current = callback;
+    };
+    // 🔍 Hàm quét thiết bị BLE (tùy môi trường)
+    const startScan = async ()=>{
+        if (connectedDevice) return;
+        setScanResults([]);
+        logMsg("🔎 Scanning for MIDI devices...");
+        try {
+            // 📱 Nếu đang trong app Capacitor (Android/iOS)
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].isNativePlatform()) {
+                await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BleClient"].requestLEScan({
+                    services: [
+                        MIDI_SERVICE_UUID
+                    ]
+                }, (result)=>{
+                    if (result.device && result.rssi > -90) {
+                        setScanResults((prev)=>{
+                            if (!prev.find((d)=>d.deviceId === result.device.deviceId)) {
+                                logMsg(`📡 Found: ${result.device.name || result.device.deviceId}`);
+                                return [
+                                    ...prev,
+                                    result.device
+                                ];
+                            }
+                            return prev;
+                        });
+                    }
+                });
+                setTimeout(async ()=>{
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BleClient"].stopLEScan();
+                    logMsg(`🛑 Scan stopped (${scanResults.length} devices).`);
+                }, 5000);
+            } else if ("bluetooth" in navigator) {
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        {
+                            services: [
+                                MIDI_SERVICE_UUID
+                            ]
+                        }
+                    ],
+                    optionalServices: [
+                        MIDI_SERVICE_UUID
+                    ]
+                });
+                logMsg(`🎹 Selected device: ${device.name || "Unknown"}`);
+                // Gán vào scanResults để hiển thị
+                setScanResults([
+                    {
+                        deviceId: device.id,
+                        name: device.name || "Unknown"
+                    }
+                ]);
+                // Kết nối qua Web Bluetooth
+                const server = await device.gatt?.connect();
+                const service = await server?.getPrimaryService(MIDI_SERVICE_UUID);
+                const characteristic = await service?.getCharacteristic(MIDI_CHARACTERISTIC_UUID);
+                await characteristic?.startNotifications();
+                characteristic?.addEventListener("characteristicvaluechanged", (event)=>{
+                    const value = event.target.value;
+                    if (!value) return;
+                    handleMidiMessage(new Uint8Array(value.buffer));
+                });
+                setConnectedDevice({
+                    deviceId: device.id,
+                    name: device.name
+                });
+                logMsg("✅ Connected via Web Bluetooth!");
+            } else {
+                logMsg("❌ BLE not supported on this platform.");
+            }
+        } catch (err) {
+            logMsg("⚠️ Scan error: " + err.message);
+        }
+    };
+    const connectDevice = async (device)=>{
+        if (!__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].isNativePlatform()) return;
+        logMsg(`🔌 Connecting to ${device.name || device.deviceId}...`);
+        try {
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BleClient"].connect(device.deviceId, ()=>disconnect());
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BleClient"].startNotifications(device.deviceId, MIDI_SERVICE_UUID, MIDI_CHARACTERISTIC_UUID, (value)=>{
+                handleMidiMessage(new Uint8Array(value.buffer));
+            });
+            setConnectedDevice(device);
+            logMsg(`✅ Connected to ${device.name || device.deviceId}`);
+        } catch (e) {
+            logMsg(`⚠️ Connection error: ${e.message}`);
+        }
+    };
+    const disconnect = async ()=>{
+        if (connectedDevice) {
+            try {
+                if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].isNativePlatform()) {
+                    await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BleClient"].disconnect(connectedDevice.deviceId);
+                } else {
+                    // Web Bluetooth
+                    navigator.bluetooth?.getDevices?.().then(async (devices)=>{
+                        for (const d of devices){
+                            if (d.id === connectedDevice.deviceId && d.gatt?.connected) {
+                                await d.gatt.disconnect();
+                            }
+                        }
+                    });
+                }
+                logMsg(`🔌 Disconnected: ${connectedDevice.name}`);
+            } catch (e) {
+                logMsg("⚠️ Disconnect error: " + e.message);
+            }
+            setConnectedDevice(null);
+        }
+    };
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            padding: "20px"
+        },
+        children: [
+            connectedDevice ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PianoTutorial, {
+                file: "/alphatab/Canon_in_D.gp",
+                onMidiMessage: registerMidiMessageHandler
+            }, void 0, false, {
+                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                lineNumber: 156,
+                columnNumber: 9
+            }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                        children: "🎹 Next.js MIDI BLE Scanner"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 160,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        children: [
+                            "Trạng thái:",
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                children: connectedDevice ? connectedDevice.name || connectedDevice.deviceId : "Chưa kết nối"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                                lineNumber: 163,
+                                columnNumber: 9
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 161,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: startScan,
+                        disabled: !!connectedDevice,
+                        style: {
+                            padding: "10px",
+                            backgroundColor: "lightblue",
+                            border: "none",
+                            marginRight: "10px"
+                        },
+                        children: scanResults.length > 0 ? `Rescan (${scanResults.length} found)` : "Start Scan for Piano MIDI"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 170,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: disconnect,
+                        disabled: !connectedDevice,
+                        style: {
+                            padding: "10px",
+                            backgroundColor: "salmon",
+                            border: "none"
+                        },
+                        children: "Disconnect"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 185,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                        style: {
+                            margin: "20px 0"
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 197,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                        children: [
+                            "Tìm thấy (",
+                            scanResults.length,
+                            ")"
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 199,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                        style: {
+                            listStyleType: "none",
+                            padding: 0
+                        },
+                        children: scanResults.map((device)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                style: {
+                                    marginBottom: "5px"
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                        children: device.name || "Unknown Device"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                                        lineNumber: 203,
+                                        columnNumber: 13
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    " (",
+                                    device.deviceId,
+                                    ")",
+                                    !__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].isNativePlatform() ? null : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>connectDevice(device),
+                                        disabled: !!connectedDevice,
+                                        style: {
+                                            marginLeft: "10px",
+                                            padding: "5px 10px"
+                                        },
+                                        children: "Connect"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                                        lineNumber: 205,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, device.deviceId, true, {
+                                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                                lineNumber: 202,
+                                columnNumber: 11
+                            }, ("TURBOPACK compile-time value", void 0)))
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                        lineNumber: 200,
+                        columnNumber: 7
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                lineNumber: 158,
+                columnNumber: 9
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
+                style: {
+                    margin: "20px 0"
+                }
+            }, void 0, false, {
+                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                lineNumber: 219,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                children: "Log"
+            }, void 0, false, {
+                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                lineNumber: 221,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("pre", {
+                style: {
+                    whiteSpace: "pre-wrap",
+                    backgroundColor: "#eee",
+                    padding: "10px",
+                    maxHeight: "300px",
+                    overflowY: "scroll",
+                    fontSize: "12px"
+                },
+                children: log
+            }, void 0, false, {
+                fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+                lineNumber: 222,
+                columnNumber: 7
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/(DashboardLayout)/piano/page.tsx",
+        lineNumber: 154,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+};
+const __TURBOPACK__default__export__ = MidiPianoScanner;
+}),
+"[project]/node_modules/@capacitor/core/dist/index.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/*! Capacitor: https://capacitorjs.com/ - MIT License */ __turbopack_context__.s([
+    "Capacitor",
+    ()=>Capacitor,
+    "CapacitorCookies",
+    ()=>CapacitorCookies,
+    "CapacitorException",
+    ()=>CapacitorException,
+    "CapacitorHttp",
+    ()=>CapacitorHttp,
+    "ExceptionCode",
+    ()=>ExceptionCode,
+    "WebPlugin",
+    ()=>WebPlugin,
+    "WebView",
+    ()=>WebView,
+    "buildRequestInit",
+    ()=>buildRequestInit,
+    "registerPlugin",
+    ()=>registerPlugin
+]);
+var ExceptionCode;
+(function(ExceptionCode) {
+    /**
+     * API is not implemented.
+     *
+     * This usually means the API can't be used because it is not implemented for
+     * the current platform.
+     */ ExceptionCode["Unimplemented"] = "UNIMPLEMENTED";
+    /**
+     * API is not available.
+     *
+     * This means the API can't be used right now because:
+     *   - it is currently missing a prerequisite, such as network connectivity
+     *   - it requires a particular platform or browser version
+     */ ExceptionCode["Unavailable"] = "UNAVAILABLE";
+})(ExceptionCode || (ExceptionCode = {}));
+class CapacitorException extends Error {
+    constructor(message, code, data){
+        super(message);
+        this.message = message;
+        this.code = code;
+        this.data = data;
+    }
+}
+const getPlatformId = (win)=>{
+    var _a, _b;
+    if (win === null || win === void 0 ? void 0 : win.androidBridge) {
+        return 'android';
+    } else if ((_b = (_a = win === null || win === void 0 ? void 0 : win.webkit) === null || _a === void 0 ? void 0 : _a.messageHandlers) === null || _b === void 0 ? void 0 : _b.bridge) {
+        return 'ios';
+    } else {
+        return 'web';
+    }
+};
+const createCapacitor = (win)=>{
+    const capCustomPlatform = win.CapacitorCustomPlatform || null;
+    const cap = win.Capacitor || {};
+    const Plugins = cap.Plugins = cap.Plugins || {};
+    const getPlatform = ()=>{
+        return capCustomPlatform !== null ? capCustomPlatform.name : getPlatformId(win);
+    };
+    const isNativePlatform = ()=>getPlatform() !== 'web';
+    const isPluginAvailable = (pluginName)=>{
+        const plugin = registeredPlugins.get(pluginName);
+        if (plugin === null || plugin === void 0 ? void 0 : plugin.platforms.has(getPlatform())) {
+            // JS implementation available for the current platform.
+            return true;
+        }
+        if (getPluginHeader(pluginName)) {
+            // Native implementation available.
+            return true;
+        }
+        return false;
+    };
+    const getPluginHeader = (pluginName)=>{
+        var _a;
+        return (_a = cap.PluginHeaders) === null || _a === void 0 ? void 0 : _a.find((h)=>h.name === pluginName);
+    };
+    const handleError = (err)=>win.console.error(err);
+    const registeredPlugins = new Map();
+    const registerPlugin = (pluginName, jsImplementations = {})=>{
+        const registeredPlugin = registeredPlugins.get(pluginName);
+        if (registeredPlugin) {
+            console.warn(`Capacitor plugin "${pluginName}" already registered. Cannot register plugins twice.`);
+            return registeredPlugin.proxy;
+        }
+        const platform = getPlatform();
+        const pluginHeader = getPluginHeader(pluginName);
+        let jsImplementation;
+        const loadPluginImplementation = async ()=>{
+            if (!jsImplementation && platform in jsImplementations) {
+                jsImplementation = typeof jsImplementations[platform] === 'function' ? jsImplementation = await jsImplementations[platform]() : jsImplementation = jsImplementations[platform];
+            } else if (capCustomPlatform !== null && !jsImplementation && 'web' in jsImplementations) {
+                jsImplementation = typeof jsImplementations['web'] === 'function' ? jsImplementation = await jsImplementations['web']() : jsImplementation = jsImplementations['web'];
+            }
+            return jsImplementation;
+        };
+        const createPluginMethod = (impl, prop)=>{
+            var _a, _b;
+            if (pluginHeader) {
+                const methodHeader = pluginHeader === null || pluginHeader === void 0 ? void 0 : pluginHeader.methods.find((m)=>prop === m.name);
+                if (methodHeader) {
+                    if (methodHeader.rtype === 'promise') {
+                        return (options)=>cap.nativePromise(pluginName, prop.toString(), options);
+                    } else {
+                        return (options, callback)=>cap.nativeCallback(pluginName, prop.toString(), options, callback);
+                    }
+                } else if (impl) {
+                    return (_a = impl[prop]) === null || _a === void 0 ? void 0 : _a.bind(impl);
+                }
+            } else if (impl) {
+                return (_b = impl[prop]) === null || _b === void 0 ? void 0 : _b.bind(impl);
+            } else {
+                throw new CapacitorException(`"${pluginName}" plugin is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+            }
+        };
+        const createPluginMethodWrapper = (prop)=>{
+            let remove;
+            const wrapper = (...args)=>{
+                const p = loadPluginImplementation().then((impl)=>{
+                    const fn = createPluginMethod(impl, prop);
+                    if (fn) {
+                        const p = fn(...args);
+                        remove = p === null || p === void 0 ? void 0 : p.remove;
+                        return p;
+                    } else {
+                        throw new CapacitorException(`"${pluginName}.${prop}()" is not implemented on ${platform}`, ExceptionCode.Unimplemented);
+                    }
+                });
+                if (prop === 'addListener') {
+                    p.remove = async ()=>remove();
+                }
+                return p;
+            };
+            // Some flair ✨
+            wrapper.toString = ()=>`${prop.toString()}() { [capacitor code] }`;
+            Object.defineProperty(wrapper, 'name', {
+                value: prop,
+                writable: false,
+                configurable: false
+            });
+            return wrapper;
+        };
+        const addListener = createPluginMethodWrapper('addListener');
+        const removeListener = createPluginMethodWrapper('removeListener');
+        const addListenerNative = (eventName, callback)=>{
+            const call = addListener({
+                eventName
+            }, callback);
+            const remove = async ()=>{
+                const callbackId = await call;
+                removeListener({
+                    eventName,
+                    callbackId
+                }, callback);
+            };
+            const p = new Promise((resolve)=>call.then(()=>resolve({
+                        remove
+                    })));
+            p.remove = async ()=>{
+                console.warn(`Using addListener() without 'await' is deprecated.`);
+                await remove();
+            };
+            return p;
+        };
+        const proxy = new Proxy({}, {
+            get (_, prop) {
+                switch(prop){
+                    // https://github.com/facebook/react/issues/20030
+                    case '$$typeof':
+                        return undefined;
+                    case 'toJSON':
+                        return ()=>({});
+                    case 'addListener':
+                        return pluginHeader ? addListenerNative : addListener;
+                    case 'removeListener':
+                        return removeListener;
+                    default:
+                        return createPluginMethodWrapper(prop);
+                }
+            }
+        });
+        Plugins[pluginName] = proxy;
+        registeredPlugins.set(pluginName, {
+            name: pluginName,
+            proxy,
+            platforms: new Set([
+                ...Object.keys(jsImplementations),
+                ...pluginHeader ? [
+                    platform
+                ] : []
+            ])
+        });
+        return proxy;
+    };
+    // Add in convertFileSrc for web, it will already be available in native context
+    if (!cap.convertFileSrc) {
+        cap.convertFileSrc = (filePath)=>filePath;
+    }
+    cap.getPlatform = getPlatform;
+    cap.handleError = handleError;
+    cap.isNativePlatform = isNativePlatform;
+    cap.isPluginAvailable = isPluginAvailable;
+    cap.registerPlugin = registerPlugin;
+    cap.Exception = CapacitorException;
+    cap.DEBUG = !!cap.DEBUG;
+    cap.isLoggingEnabled = !!cap.isLoggingEnabled;
+    return cap;
+};
+const initCapacitorGlobal = (win)=>win.Capacitor = createCapacitor(win);
+const Capacitor = /*#__PURE__*/ initCapacitorGlobal(typeof globalThis !== 'undefined' ? globalThis : typeof self !== 'undefined' ? self : ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : ("TURBOPACK compile-time truthy", 1) ? /*TURBOPACK member replacement*/ __turbopack_context__.g : "TURBOPACK unreachable");
+const registerPlugin = Capacitor.registerPlugin;
+/**
+ * Base class web plugins should extend.
+ */ class WebPlugin {
+    constructor(){
+        this.listeners = {};
+        this.retainedEventArguments = {};
+        this.windowListeners = {};
+    }
+    addListener(eventName, listenerFunc) {
+        let firstListener = false;
+        const listeners = this.listeners[eventName];
+        if (!listeners) {
+            this.listeners[eventName] = [];
+            firstListener = true;
+        }
+        this.listeners[eventName].push(listenerFunc);
+        // If we haven't added a window listener for this event and it requires one,
+        // go ahead and add it
+        const windowListener = this.windowListeners[eventName];
+        if (windowListener && !windowListener.registered) {
+            this.addWindowListener(windowListener);
+        }
+        if (firstListener) {
+            this.sendRetainedArgumentsForEvent(eventName);
+        }
+        const remove = async ()=>this.removeListener(eventName, listenerFunc);
+        const p = Promise.resolve({
+            remove
+        });
+        return p;
+    }
+    async removeAllListeners() {
+        this.listeners = {};
+        for(const listener in this.windowListeners){
+            this.removeWindowListener(this.windowListeners[listener]);
+        }
+        this.windowListeners = {};
+    }
+    notifyListeners(eventName, data, retainUntilConsumed) {
+        const listeners = this.listeners[eventName];
+        if (!listeners) {
+            if (retainUntilConsumed) {
+                let args = this.retainedEventArguments[eventName];
+                if (!args) {
+                    args = [];
+                }
+                args.push(data);
+                this.retainedEventArguments[eventName] = args;
+            }
+            return;
+        }
+        listeners.forEach((listener)=>listener(data));
+    }
+    hasListeners(eventName) {
+        var _a;
+        return !!((_a = this.listeners[eventName]) === null || _a === void 0 ? void 0 : _a.length);
+    }
+    registerWindowListener(windowEventName, pluginEventName) {
+        this.windowListeners[pluginEventName] = {
+            registered: false,
+            windowEventName,
+            pluginEventName,
+            handler: (event)=>{
+                this.notifyListeners(pluginEventName, event);
+            }
+        };
+    }
+    unimplemented(msg = 'not implemented') {
+        return new Capacitor.Exception(msg, ExceptionCode.Unimplemented);
+    }
+    unavailable(msg = 'not available') {
+        return new Capacitor.Exception(msg, ExceptionCode.Unavailable);
+    }
+    async removeListener(eventName, listenerFunc) {
+        const listeners = this.listeners[eventName];
+        if (!listeners) {
+            return;
+        }
+        const index = listeners.indexOf(listenerFunc);
+        this.listeners[eventName].splice(index, 1);
+        // If there are no more listeners for this type of event,
+        // remove the window listener
+        if (!this.listeners[eventName].length) {
+            this.removeWindowListener(this.windowListeners[eventName]);
+        }
+    }
+    addWindowListener(handle) {
+        window.addEventListener(handle.windowEventName, handle.handler);
+        handle.registered = true;
+    }
+    removeWindowListener(handle) {
+        if (!handle) {
+            return;
+        }
+        window.removeEventListener(handle.windowEventName, handle.handler);
+        handle.registered = false;
+    }
+    sendRetainedArgumentsForEvent(eventName) {
+        const args = this.retainedEventArguments[eventName];
+        if (!args) {
+            return;
+        }
+        delete this.retainedEventArguments[eventName];
+        args.forEach((arg)=>{
+            this.notifyListeners(eventName, arg);
+        });
+    }
+}
+const WebView = /*#__PURE__*/ registerPlugin('WebView');
+/******** END WEB VIEW PLUGIN ********/ /******** COOKIES PLUGIN ********/ /**
+ * Safely web encode a string value (inspired by js-cookie)
+ * @param str The string value to encode
+ */ const encode = (str)=>encodeURIComponent(str).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape);
+/**
+ * Safely web decode a string value (inspired by js-cookie)
+ * @param str The string value to decode
+ */ const decode = (str)=>str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
+class CapacitorCookiesPluginWeb extends WebPlugin {
+    async getCookies() {
+        const cookies = document.cookie;
+        const cookieMap = {};
+        cookies.split(';').forEach((cookie)=>{
+            if (cookie.length <= 0) return;
+            // Replace first "=" with CAP_COOKIE to prevent splitting on additional "="
+            let [key, value] = cookie.replace(/=/, 'CAP_COOKIE').split('CAP_COOKIE');
+            key = decode(key).trim();
+            value = decode(value).trim();
+            cookieMap[key] = value;
+        });
+        return cookieMap;
+    }
+    async setCookie(options) {
+        try {
+            // Safely Encoded Key/Value
+            const encodedKey = encode(options.key);
+            const encodedValue = encode(options.value);
+            // Clean & sanitize options
+            const expires = `; expires=${(options.expires || '').replace('expires=', '')}`; // Default is "; expires="
+            const path = (options.path || '/').replace('path=', ''); // Default is "path=/"
+            const domain = options.url != null && options.url.length > 0 ? `domain=${options.url}` : '';
+            document.cookie = `${encodedKey}=${encodedValue || ''}${expires}; path=${path}; ${domain};`;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+    async deleteCookie(options) {
+        try {
+            document.cookie = `${options.key}=; Max-Age=0`;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+    async clearCookies() {
+        try {
+            const cookies = document.cookie.split(';') || [];
+            for (const cookie of cookies){
+                document.cookie = cookie.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+            }
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+    async clearAllCookies() {
+        try {
+            await this.clearCookies();
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+}
+const CapacitorCookies = registerPlugin('CapacitorCookies', {
+    web: ()=>new CapacitorCookiesPluginWeb()
+});
+// UTILITY FUNCTIONS
+/**
+ * Read in a Blob value and return it as a base64 string
+ * @param blob The blob value to convert to a base64 string
+ */ const readBlobAsBase64 = async (blob)=>new Promise((resolve, reject)=>{
+        const reader = new FileReader();
+        reader.onload = ()=>{
+            const base64String = reader.result;
+            // remove prefix "data:application/pdf;base64,"
+            resolve(base64String.indexOf(',') >= 0 ? base64String.split(',')[1] : base64String);
+        };
+        reader.onerror = (error)=>reject(error);
+        reader.readAsDataURL(blob);
+    });
+/**
+ * Normalize an HttpHeaders map by lowercasing all of the values
+ * @param headers The HttpHeaders object to normalize
+ */ const normalizeHttpHeaders = (headers = {})=>{
+    const originalKeys = Object.keys(headers);
+    const loweredKeys = Object.keys(headers).map((k)=>k.toLocaleLowerCase());
+    const normalized = loweredKeys.reduce((acc, key, index)=>{
+        acc[key] = headers[originalKeys[index]];
+        return acc;
+    }, {});
+    return normalized;
+};
+/**
+ * Builds a string of url parameters that
+ * @param params A map of url parameters
+ * @param shouldEncode true if you should encodeURIComponent() the values (true by default)
+ */ const buildUrlParams = (params, shouldEncode = true)=>{
+    if (!params) return null;
+    const output = Object.entries(params).reduce((accumulator, entry)=>{
+        const [key, value] = entry;
+        let encodedValue;
+        let item;
+        if (Array.isArray(value)) {
+            item = '';
+            value.forEach((str)=>{
+                encodedValue = shouldEncode ? encodeURIComponent(str) : str;
+                item += `${key}=${encodedValue}&`;
+            });
+            // last character will always be "&" so slice it off
+            item.slice(0, -1);
+        } else {
+            encodedValue = shouldEncode ? encodeURIComponent(value) : value;
+            item = `${key}=${encodedValue}`;
+        }
+        return `${accumulator}&${item}`;
+    }, '');
+    // Remove initial "&" from the reduce
+    return output.substr(1);
+};
+/**
+ * Build the RequestInit object based on the options passed into the initial request
+ * @param options The Http plugin options
+ * @param extra Any extra RequestInit values
+ */ const buildRequestInit = (options, extra = {})=>{
+    const output = Object.assign({
+        method: options.method || 'GET',
+        headers: options.headers
+    }, extra);
+    // Get the content-type
+    const headers = normalizeHttpHeaders(options.headers);
+    const type = headers['content-type'] || '';
+    // If body is already a string, then pass it through as-is.
+    if (typeof options.data === 'string') {
+        output.body = options.data;
+    } else if (type.includes('application/x-www-form-urlencoded')) {
+        const params = new URLSearchParams();
+        for (const [key, value] of Object.entries(options.data || {})){
+            params.set(key, value);
+        }
+        output.body = params.toString();
+    } else if (type.includes('multipart/form-data') || options.data instanceof FormData) {
+        const form = new FormData();
+        if (options.data instanceof FormData) {
+            options.data.forEach((value, key)=>{
+                form.append(key, value);
+            });
+        } else {
+            for (const key of Object.keys(options.data)){
+                form.append(key, options.data[key]);
+            }
+        }
+        output.body = form;
+        const headers = new Headers(output.headers);
+        headers.delete('content-type'); // content-type will be set by `window.fetch` to includy boundary
+        output.headers = headers;
+    } else if (type.includes('application/json') || typeof options.data === 'object') {
+        output.body = JSON.stringify(options.data);
+    }
+    return output;
+};
+// WEB IMPLEMENTATION
+class CapacitorHttpPluginWeb extends WebPlugin {
+    /**
+     * Perform an Http request given a set of options
+     * @param options Options to build the HTTP request
+     */ async request(options) {
+        const requestInit = buildRequestInit(options, options.webFetchExtra);
+        const urlParams = buildUrlParams(options.params, options.shouldEncodeUrlParams);
+        const url = urlParams ? `${options.url}?${urlParams}` : options.url;
+        const response = await fetch(url, requestInit);
+        const contentType = response.headers.get('content-type') || '';
+        // Default to 'text' responseType so no parsing happens
+        let { responseType = 'text' } = response.ok ? options : {};
+        // If the response content-type is json, force the response to be json
+        if (contentType.includes('application/json')) {
+            responseType = 'json';
+        }
+        let data;
+        let blob;
+        switch(responseType){
+            case 'arraybuffer':
+            case 'blob':
+                blob = await response.blob();
+                data = await readBlobAsBase64(blob);
+                break;
+            case 'json':
+                data = await response.json();
+                break;
+            case 'document':
+            case 'text':
+            default:
+                data = await response.text();
+        }
+        // Convert fetch headers to Capacitor HttpHeaders
+        const headers = {};
+        response.headers.forEach((value, key)=>{
+            headers[key] = value;
+        });
+        return {
+            data,
+            headers,
+            status: response.status,
+            url: response.url
+        };
+    }
+    /**
+     * Perform an Http GET request given a set of options
+     * @param options Options to build the HTTP request
+     */ async get(options) {
+        return this.request(Object.assign(Object.assign({}, options), {
+            method: 'GET'
+        }));
+    }
+    /**
+     * Perform an Http POST request given a set of options
+     * @param options Options to build the HTTP request
+     */ async post(options) {
+        return this.request(Object.assign(Object.assign({}, options), {
+            method: 'POST'
+        }));
+    }
+    /**
+     * Perform an Http PUT request given a set of options
+     * @param options Options to build the HTTP request
+     */ async put(options) {
+        return this.request(Object.assign(Object.assign({}, options), {
+            method: 'PUT'
+        }));
+    }
+    /**
+     * Perform an Http PATCH request given a set of options
+     * @param options Options to build the HTTP request
+     */ async patch(options) {
+        return this.request(Object.assign(Object.assign({}, options), {
+            method: 'PATCH'
+        }));
+    }
+    /**
+     * Perform an Http DELETE request given a set of options
+     * @param options Options to build the HTTP request
+     */ async delete(options) {
+        return this.request(Object.assign(Object.assign({}, options), {
+            method: 'DELETE'
+        }));
+    }
+}
+const CapacitorHttp = registerPlugin('CapacitorHttp', {
+    web: ()=>new CapacitorHttpPluginWeb()
+});
+;
+ //# sourceMappingURL=index.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/definitions.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * Android scan mode
+ */ __turbopack_context__.s([
+    "ConnectionPriority",
+    ()=>ConnectionPriority,
+    "ScanMode",
+    ()=>ScanMode
+]);
+var ScanMode;
+(function(ScanMode) {
+    /**
+     * Perform Bluetooth LE scan in low power mode. This mode is enforced if the scanning application is not in foreground.
+     * https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_LOW_POWER
+     */ ScanMode[ScanMode["SCAN_MODE_LOW_POWER"] = 0] = "SCAN_MODE_LOW_POWER";
+    /**
+     * Perform Bluetooth LE scan in balanced power mode. (default) Scan results are returned at a rate that provides a good trade-off between scan frequency and power consumption.
+     * https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_BALANCED
+     */ ScanMode[ScanMode["SCAN_MODE_BALANCED"] = 1] = "SCAN_MODE_BALANCED";
+    /**
+     * Scan using highest duty cycle. It's recommended to only use this mode when the application is running in the foreground.
+     * https://developer.android.com/reference/android/bluetooth/le/ScanSettings#SCAN_MODE_LOW_LATENCY
+     */ ScanMode[ScanMode["SCAN_MODE_LOW_LATENCY"] = 2] = "SCAN_MODE_LOW_LATENCY";
+})(ScanMode || (ScanMode = {}));
+var ConnectionPriority;
+(function(ConnectionPriority) {
+    /**
+     * Use the connection parameters recommended by the Bluetooth SIG. This is the default value if no connection parameter update is requested.
+     * https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_BALANCED
+     */ ConnectionPriority[ConnectionPriority["CONNECTION_PRIORITY_BALANCED"] = 0] = "CONNECTION_PRIORITY_BALANCED";
+    /**
+     * Request a high priority, low latency connection. An application should only request high priority connection parameters to transfer large amounts of data over LE quickly. Once the transfer is complete, the application should request CONNECTION_PRIORITY_BALANCED connection parameters to reduce energy use.
+     * https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_HIGH
+     */ ConnectionPriority[ConnectionPriority["CONNECTION_PRIORITY_HIGH"] = 1] = "CONNECTION_PRIORITY_HIGH";
+    /**
+     * Request low power, reduced data rate connection parameters.
+     * https://developer.android.com/reference/android/bluetooth/BluetoothGatt#CONNECTION_PRIORITY_LOW_POWER
+     */ ConnectionPriority[ConnectionPriority["CONNECTION_PRIORITY_LOW_POWER"] = 2] = "CONNECTION_PRIORITY_LOW_POWER";
+})(ConnectionPriority || (ConnectionPriority = {})); //# sourceMappingURL=definitions.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/conversion.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * Convert an array of numbers into a DataView.
+ */ __turbopack_context__.s([
+    "dataViewToHexString",
+    ()=>dataViewToHexString,
+    "dataViewToNumbers",
+    ()=>dataViewToNumbers,
+    "dataViewToText",
+    ()=>dataViewToText,
+    "hexStringToDataView",
+    ()=>hexStringToDataView,
+    "mapToObject",
+    ()=>mapToObject,
+    "numberToUUID",
+    ()=>numberToUUID,
+    "numbersToDataView",
+    ()=>numbersToDataView,
+    "textToDataView",
+    ()=>textToDataView,
+    "webUUIDToString",
+    ()=>webUUIDToString
+]);
+function numbersToDataView(value) {
+    return new DataView(Uint8Array.from(value).buffer);
+}
+function dataViewToNumbers(value) {
+    return Array.from(new Uint8Array(value.buffer, value.byteOffset, value.byteLength));
+}
+function textToDataView(value) {
+    return numbersToDataView(value.split('').map((s)=>s.charCodeAt(0)));
+}
+function dataViewToText(value) {
+    return String.fromCharCode(...dataViewToNumbers(value));
+}
+function numberToUUID(value) {
+    return `0000${value.toString(16).padStart(4, '0')}-0000-1000-8000-00805f9b34fb`;
+}
+function hexStringToDataView(hex) {
+    const bin = [];
+    let i, c, isEmpty = 1, buffer = 0;
+    for(i = 0; i < hex.length; i++){
+        c = hex.charCodeAt(i);
+        if (c > 47 && c < 58 || c > 64 && c < 71 || c > 96 && c < 103) {
+            buffer = buffer << 4 ^ (c > 64 ? c + 9 : c) & 15;
+            if ("TURBOPACK compile-time truthy", 1) {
+                bin.push(buffer & 0xff);
+            }
+        }
+    }
+    return numbersToDataView(bin);
+}
+function dataViewToHexString(value) {
+    return dataViewToNumbers(value).map((n)=>{
+        let s = n.toString(16);
+        if (s.length == 1) {
+            s = '0' + s;
+        }
+        return s;
+    }).join('');
+}
+function webUUIDToString(uuid) {
+    if (typeof uuid === 'string') {
+        return uuid;
+    } else if (typeof uuid === 'number') {
+        return numberToUUID(uuid);
+    } else {
+        throw new Error('Invalid UUID');
+    }
+}
+function mapToObject(map) {
+    const obj = {};
+    if (!map) {
+        return undefined;
+    }
+    map.forEach((value, key)=>{
+        obj[key.toString()] = value;
+    });
+    return obj;
+} //# sourceMappingURL=conversion.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/plugin.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "BluetoothLe",
+    ()=>BluetoothLe
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor/core/dist/index.js [app-ssr] (ecmascript)");
+;
+const BluetoothLe = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["registerPlugin"])('BluetoothLe', {
+    web: ()=>__turbopack_context__.A("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/web.js [app-ssr] (ecmascript, async loader)").then((m)=>new m.BluetoothLeWeb())
+}); //# sourceMappingURL=plugin.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/queue.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "getQueue",
+    ()=>getQueue
+]);
+const makeQueue = ()=>{
+    let currentTask = Promise.resolve();
+    // create a new promise so that errors can be bubbled
+    // up to the caller without being caught by the queue
+    return (fn)=>new Promise((resolve, reject)=>{
+            currentTask = currentTask.then(()=>fn()).then(resolve).catch(reject);
+        });
+};
+function getQueue(enabled) {
+    if (enabled) {
+        return makeQueue();
+    }
+    return (fn)=>fn();
+} //# sourceMappingURL=queue.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/validators.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "parseUUID",
+    ()=>parseUUID
+]);
+function parseUUID(uuid) {
+    if (typeof uuid !== 'string') {
+        throw new Error(`Invalid UUID type ${typeof uuid}. Expected string.`);
+    }
+    uuid = uuid.toLowerCase();
+    const is128BitUuid = uuid.search(/^[0-9a-f]{8}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{4}\b-[0-9a-f]{12}$/) >= 0;
+    if (!is128BitUuid) {
+        throw new Error(`Invalid UUID format ${uuid}. Expected 128 bit string (e.g. "0000180d-0000-1000-8000-00805f9b34fb").`);
+    }
+    return uuid;
+} //# sourceMappingURL=validators.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/bleClient.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "BleClient",
+    ()=>BleClient
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor/core/dist/index.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/conversion.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/plugin.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$queue$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/queue.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/validators.js [app-ssr] (ecmascript)");
+;
+;
+;
+;
+;
+class BleClientClass {
+    constructor(){
+        this.scanListener = null;
+        this.eventListeners = new Map();
+        this.queue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$queue$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getQueue"])(true);
+    }
+    enableQueue() {
+        this.queue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$queue$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getQueue"])(true);
+    }
+    disableQueue() {
+        this.queue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$queue$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getQueue"])(false);
+    }
+    async initialize(options) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].initialize(options);
+        });
+    }
+    async isEnabled() {
+        const enabled = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].isEnabled();
+            return result.value;
+        });
+        return enabled;
+    }
+    async requestEnable() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].requestEnable();
+        });
+    }
+    async enable() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].enable();
+        });
+    }
+    async disable() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].disable();
+        });
+    }
+    async startEnabledNotifications(callback) {
+        await this.queue(async ()=>{
+            var _a;
+            const key = `onEnabledChanged`;
+            await ((_a = this.eventListeners.get(key)) === null || _a === void 0 ? void 0 : _a.remove());
+            const listener = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].addListener(key, (result)=>{
+                callback(result.value);
+            });
+            this.eventListeners.set(key, listener);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].startEnabledNotifications();
+        });
+    }
+    async stopEnabledNotifications() {
+        await this.queue(async ()=>{
+            var _a;
+            const key = `onEnabledChanged`;
+            await ((_a = this.eventListeners.get(key)) === null || _a === void 0 ? void 0 : _a.remove());
+            this.eventListeners.delete(key);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].stopEnabledNotifications();
+        });
+    }
+    async isLocationEnabled() {
+        const enabled = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].isLocationEnabled();
+            return result.value;
+        });
+        return enabled;
+    }
+    async openLocationSettings() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].openLocationSettings();
+        });
+    }
+    async openBluetoothSettings() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].openBluetoothSettings();
+        });
+    }
+    async openAppSettings() {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].openAppSettings();
+        });
+    }
+    async setDisplayStrings(displayStrings) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].setDisplayStrings(displayStrings);
+        });
+    }
+    async requestDevice(options) {
+        options = options ? this.validateRequestBleDeviceOptions(options) : undefined;
+        const result = await this.queue(async ()=>{
+            const device = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].requestDevice(options);
+            return device;
+        });
+        return result;
+    }
+    async requestLEScan(options, callback) {
+        options = this.validateRequestBleDeviceOptions(options);
+        await this.queue(async ()=>{
+            var _a;
+            await ((_a = this.scanListener) === null || _a === void 0 ? void 0 : _a.remove());
+            this.scanListener = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].addListener('onScanResult', (resultInternal)=>{
+                const result = Object.assign(Object.assign({}, resultInternal), {
+                    manufacturerData: this.convertObject(resultInternal.manufacturerData),
+                    serviceData: this.convertObject(resultInternal.serviceData),
+                    rawAdvertisement: resultInternal.rawAdvertisement ? this.convertValue(resultInternal.rawAdvertisement) : undefined
+                });
+                callback(result);
+            });
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].requestLEScan(options);
+        });
+    }
+    async stopLEScan() {
+        await this.queue(async ()=>{
+            var _a;
+            await ((_a = this.scanListener) === null || _a === void 0 ? void 0 : _a.remove());
+            this.scanListener = null;
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].stopLEScan();
+        });
+    }
+    async getDevices(deviceIds) {
+        if (!Array.isArray(deviceIds)) {
+            throw new Error('deviceIds must be an array');
+        }
+        return this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].getDevices({
+                deviceIds
+            });
+            return result.devices;
+        });
+    }
+    async getConnectedDevices(services) {
+        if (!Array.isArray(services)) {
+            throw new Error('services must be an array');
+        }
+        services = services.map(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"]);
+        return this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].getConnectedDevices({
+                services
+            });
+            return result.devices;
+        });
+    }
+    async getBondedDevices() {
+        return this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].getBondedDevices();
+            return result.devices;
+        });
+    }
+    async connect(deviceId, onDisconnect, options) {
+        await this.queue(async ()=>{
+            var _a;
+            if (onDisconnect) {
+                const key = `disconnected|${deviceId}`;
+                await ((_a = this.eventListeners.get(key)) === null || _a === void 0 ? void 0 : _a.remove());
+                const listener = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].addListener(key, ()=>{
+                    onDisconnect(deviceId);
+                });
+                this.eventListeners.set(key, listener);
+            }
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].connect(Object.assign({
+                deviceId
+            }, options));
+        });
+    }
+    async createBond(deviceId, options) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].createBond(Object.assign({
+                deviceId
+            }, options));
+        });
+    }
+    async isBonded(deviceId) {
+        const isBonded = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].isBonded({
+                deviceId
+            });
+            return result.value;
+        });
+        return isBonded;
+    }
+    async disconnect(deviceId) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].disconnect({
+                deviceId
+            });
+        });
+    }
+    async getServices(deviceId) {
+        const services = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].getServices({
+                deviceId
+            });
+            return result.services;
+        });
+        return services;
+    }
+    async discoverServices(deviceId) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].discoverServices({
+                deviceId
+            });
+        });
+    }
+    async getMtu(deviceId) {
+        const value = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].getMtu({
+                deviceId
+            });
+            return result.value;
+        });
+        return value;
+    }
+    async requestConnectionPriority(deviceId, connectionPriority) {
+        await this.queue(async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].requestConnectionPriority({
+                deviceId,
+                connectionPriority
+            });
+        });
+    }
+    async readRssi(deviceId) {
+        const value = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].readRssi({
+                deviceId
+            });
+            return parseFloat(result.value);
+        });
+        return value;
+    }
+    async read(deviceId, service, characteristic, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        const value = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].read(Object.assign({
+                deviceId,
+                service,
+                characteristic
+            }, options));
+            return this.convertValue(result.value);
+        });
+        return value;
+    }
+    async write(deviceId, service, characteristic, value, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        return this.queue(async ()=>{
+            if (!(value === null || value === void 0 ? void 0 : value.buffer)) {
+                throw new Error('Invalid data.');
+            }
+            let writeValue = value;
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].getPlatform() !== 'web') {
+                // on native we can only write strings
+                writeValue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["dataViewToHexString"])(value);
+            }
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].write(Object.assign({
+                deviceId,
+                service,
+                characteristic,
+                value: writeValue
+            }, options));
+        });
+    }
+    async writeWithoutResponse(deviceId, service, characteristic, value, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        await this.queue(async ()=>{
+            if (!(value === null || value === void 0 ? void 0 : value.buffer)) {
+                throw new Error('Invalid data.');
+            }
+            let writeValue = value;
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].getPlatform() !== 'web') {
+                // on native we can only write strings
+                writeValue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["dataViewToHexString"])(value);
+            }
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].writeWithoutResponse(Object.assign({
+                deviceId,
+                service,
+                characteristic,
+                value: writeValue
+            }, options));
+        });
+    }
+    async readDescriptor(deviceId, service, characteristic, descriptor, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        descriptor = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(descriptor);
+        const value = await this.queue(async ()=>{
+            const result = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].readDescriptor(Object.assign({
+                deviceId,
+                service,
+                characteristic,
+                descriptor
+            }, options));
+            return this.convertValue(result.value);
+        });
+        return value;
+    }
+    async writeDescriptor(deviceId, service, characteristic, descriptor, value, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        descriptor = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(descriptor);
+        return this.queue(async ()=>{
+            if (!(value === null || value === void 0 ? void 0 : value.buffer)) {
+                throw new Error('Invalid data.');
+            }
+            let writeValue = value;
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2f$core$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Capacitor"].getPlatform() !== 'web') {
+                // on native we can only write strings
+                writeValue = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["dataViewToHexString"])(value);
+            }
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].writeDescriptor(Object.assign({
+                deviceId,
+                service,
+                characteristic,
+                descriptor,
+                value: writeValue
+            }, options));
+        });
+    }
+    async startNotifications(deviceId, service, characteristic, callback, options) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        await this.queue(async ()=>{
+            var _a;
+            const key = `notification|${deviceId}|${service}|${characteristic}`;
+            await ((_a = this.eventListeners.get(key)) === null || _a === void 0 ? void 0 : _a.remove());
+            const listener = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].addListener(key, (event)=>{
+                callback(this.convertValue(event === null || event === void 0 ? void 0 : event.value));
+            });
+            this.eventListeners.set(key, listener);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].startNotifications(Object.assign({
+                deviceId,
+                service,
+                characteristic
+            }, options));
+        });
+    }
+    async stopNotifications(deviceId, service, characteristic) {
+        service = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(service);
+        characteristic = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"])(characteristic);
+        await this.queue(async ()=>{
+            var _a;
+            const key = `notification|${deviceId}|${service}|${characteristic}`;
+            await ((_a = this.eventListeners.get(key)) === null || _a === void 0 ? void 0 : _a.remove());
+            this.eventListeners.delete(key);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BluetoothLe"].stopNotifications({
+                deviceId,
+                service,
+                characteristic
+            });
+        });
+    }
+    validateRequestBleDeviceOptions(options) {
+        if (options.services) {
+            options.services = options.services.map(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"]);
+        }
+        if (options.optionalServices) {
+            options.optionalServices = options.optionalServices.map(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$validators$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["parseUUID"]);
+        }
+        return options;
+    }
+    convertValue(value) {
+        if (typeof value === 'string') {
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["hexStringToDataView"])(value);
+        } else if (value === undefined) {
+            return new DataView(new ArrayBuffer(0));
+        }
+        return value;
+    }
+    convertObject(obj) {
+        if (obj === undefined) {
+            return undefined;
+        }
+        const result = {};
+        for (const key of Object.keys(obj)){
+            result[key] = this.convertValue(obj[key]);
+        }
+        return result;
+    }
+}
+const BleClient = new BleClientClass(); //# sourceMappingURL=bleClient.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/config.js [app-ssr] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/// <reference types="@capacitor/cli" />
+__turbopack_context__.s([]);
+;
+ //# sourceMappingURL=config.js.map
+}),
+"[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/index.js [app-ssr] (ecmascript) <locals>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$definitions$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/definitions.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$bleClient$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/bleClient.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$conversion$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/conversion.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$plugin$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/plugin.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$capacitor$2d$community$2f$bluetooth$2d$le$2f$dist$2f$esm$2f$config$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@capacitor-community/bluetooth-le/dist/esm/config.js [app-ssr] (ecmascript)"); //# sourceMappingURL=index.js.map
+;
+;
+;
+;
+;
+}),
+"[project]/node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-bailout-to-csr.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "BailoutToCSR", {
+    enumerable: true,
+    get: function() {
+        return BailoutToCSR;
+    }
+});
+const _bailouttocsr = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/lazy-dynamic/bailout-to-csr.js [app-ssr] (ecmascript)");
+function BailoutToCSR({ reason, children }) {
+    if ("TURBOPACK compile-time truthy", 1) {
+        throw Object.defineProperty(new _bailouttocsr.BailoutToCSRError(reason), "__NEXT_ERROR_CODE", {
+            value: "E394",
+            enumerable: false,
+            configurable: true
+        });
+    }
+    return children;
+} //# sourceMappingURL=dynamic-bailout-to-csr.js.map
+}),
+"[project]/node_modules/next/dist/shared/lib/encode-uri-path.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "encodeURIPath", {
+    enumerable: true,
+    get: function() {
+        return encodeURIPath;
+    }
+});
+function encodeURIPath(file) {
+    return file.split('/').map((p)=>encodeURIComponent(p)).join('/');
+} //# sourceMappingURL=encode-uri-path.js.map
+}),
+"[project]/node_modules/next/dist/shared/lib/lazy-dynamic/preload-chunks.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "PreloadChunks", {
+    enumerable: true,
+    get: function() {
+        return PreloadChunks;
+    }
+});
+const _jsxruntime = __turbopack_context__.r("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-runtime.js [app-ssr] (ecmascript)");
+const _reactdom = __turbopack_context__.r("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-dom.js [app-ssr] (ecmascript)");
+const _workasyncstorageexternal = __turbopack_context__.r("[externals]/next/dist/server/app-render/work-async-storage.external.js [external] (next/dist/server/app-render/work-async-storage.external.js, cjs)");
+const _encodeuripath = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/encode-uri-path.js [app-ssr] (ecmascript)");
+function PreloadChunks({ moduleIds }) {
+    // Early return in client compilation and only load requestStore on server side
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+    if (workStore === undefined) {
+        return null;
+    }
+    const allFiles = [];
+    // Search the current dynamic call unique key id in react loadable manifest,
+    // and find the corresponding CSS files to preload
+    if (workStore.reactLoadableManifest && moduleIds) {
+        const manifest = workStore.reactLoadableManifest;
+        for (const key of moduleIds){
+            if (!manifest[key]) continue;
+            const chunks = manifest[key].files;
+            allFiles.push(...chunks);
+        }
+    }
+    if (allFiles.length === 0) {
+        return null;
+    }
+    const dplId = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : '';
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_jsxruntime.Fragment, {
+        children: allFiles.map((chunk)=>{
+            const href = `${workStore.assetPrefix}/_next/${(0, _encodeuripath.encodeURIPath)(chunk)}${dplId}`;
+            const isCss = chunk.endsWith('.css');
+            // If it's stylesheet we use `precedence` o help hoist with React Float.
+            // For stylesheets we actually need to render the CSS because nothing else is going to do it so it needs to be part of the component tree.
+            // The `preload` for stylesheet is not optional.
+            if (isCss) {
+                return /*#__PURE__*/ (0, _jsxruntime.jsx)("link", {
+                    // @ts-ignore
+                    precedence: "dynamic",
+                    href: href,
+                    rel: "stylesheet",
+                    as: "style",
+                    nonce: workStore.nonce
+                }, chunk);
+            } else {
+                // If it's script we use ReactDOM.preload to preload the resources
+                (0, _reactdom.preload)(href, {
+                    as: 'script',
+                    fetchPriority: 'low',
+                    nonce: workStore.nonce
+                });
+                return null;
+            }
+        })
+    });
+} //# sourceMappingURL=preload-chunks.js.map
+}),
+"[project]/node_modules/next/dist/shared/lib/lazy-dynamic/loadable.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = __turbopack_context__.r("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-runtime.js [app-ssr] (ecmascript)");
+const _react = __turbopack_context__.r("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+const _dynamicbailouttocsr = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-bailout-to-csr.js [app-ssr] (ecmascript)");
+const _preloadchunks = __turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/lazy-dynamic/preload-chunks.js [app-ssr] (ecmascript)");
+// Normalize loader to return the module as form { default: Component } for `React.lazy`.
+// Also for backward compatible since next/dynamic allows to resolve a component directly with loader
+// Client component reference proxy need to be converted to a module.
+function convertModule(mod) {
+    // Check "default" prop before accessing it, as it could be client reference proxy that could break it reference.
+    // Cases:
+    // mod: { default: Component }
+    // mod: Component
+    // mod: { default: proxy(Component) }
+    // mod: proxy(Component)
+    const hasDefault = mod && 'default' in mod;
+    return {
+        default: hasDefault ? mod.default : mod
+    };
+}
+const defaultOptions = {
+    loader: ()=>Promise.resolve(convertModule(()=>null)),
+    loading: null,
+    ssr: true
+};
+function Loadable(options) {
+    const opts = {
+        ...defaultOptions,
+        ...options
+    };
+    const Lazy = /*#__PURE__*/ (0, _react.lazy)(()=>opts.loader().then(convertModule));
+    const Loading = opts.loading;
+    function LoadableComponent(props) {
+        const fallbackElement = Loading ? /*#__PURE__*/ (0, _jsxruntime.jsx)(Loading, {
+            isLoading: true,
+            pastDelay: true,
+            error: null
+        }) : null;
+        // If it's non-SSR or provided a loading component, wrap it in a suspense boundary
+        const hasSuspenseBoundary = !opts.ssr || !!opts.loading;
+        const Wrap = hasSuspenseBoundary ? _react.Suspense : _react.Fragment;
+        const wrapProps = hasSuspenseBoundary ? {
+            fallback: fallbackElement
+        } : {};
+        const children = opts.ssr ? /*#__PURE__*/ (0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+            children: [
+                ("TURBOPACK compile-time truthy", 1) ? /*#__PURE__*/ (0, _jsxruntime.jsx)(_preloadchunks.PreloadChunks, {
+                    moduleIds: opts.modules
+                }) : "TURBOPACK unreachable",
+                /*#__PURE__*/ (0, _jsxruntime.jsx)(Lazy, {
+                    ...props
+                })
+            ]
+        }) : /*#__PURE__*/ (0, _jsxruntime.jsx)(_dynamicbailouttocsr.BailoutToCSR, {
+            reason: "next/dynamic",
+            children: /*#__PURE__*/ (0, _jsxruntime.jsx)(Lazy, {
+                ...props
+            })
+        });
+        return /*#__PURE__*/ (0, _jsxruntime.jsx)(Wrap, {
+            ...wrapProps,
+            children: children
+        });
+    }
+    LoadableComponent.displayName = 'LoadableComponent';
+    return LoadableComponent;
+}
+const _default = Loadable; //# sourceMappingURL=loadable.js.map
+}),
+"[project]/node_modules/next/dist/shared/lib/app-dynamic.js [app-ssr] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return dynamic;
+    }
+});
+const _interop_require_default = __turbopack_context__.r("[project]/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-ssr] (ecmascript)");
+const _loadable = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/node_modules/next/dist/shared/lib/lazy-dynamic/loadable.js [app-ssr] (ecmascript)"));
+function dynamic(dynamicOptions, options) {
+    const loadableOptions = {};
+    if (typeof dynamicOptions === 'function') {
+        loadableOptions.loader = dynamicOptions;
+    }
+    const mergedOptions = {
+        ...loadableOptions,
+        ...options
+    };
+    return (0, _loadable.default)({
+        ...mergedOptions,
+        modules: mergedOptions.loadableGenerated?.modules
+    });
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+    Object.defineProperty(exports.default, '__esModule', {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=app-dynamic.js.map
+}),
+];
+
+//# sourceMappingURL=_bba32bc9._.js.map
